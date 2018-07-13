@@ -62,7 +62,7 @@ class AlbumDrawerPanel extends React.Component {
               className={'card'}
             >
               <img
-                src={content.thumbnailUrl}
+                src={content.url}
                 alt={content.title}
                 className={'card__image'}
               />
