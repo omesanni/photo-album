@@ -1,0 +1,22 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  background-color: $white;
+  background-clip: border-box;
+  border: 1px solid $bluish-gray;
+  border-radius: $border-radius;
+
+  &__body {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+  }
+
+  &__image {
+    object-fit: cover;
+    max-width: 100%;
+    border-top-right-radius: $border-radius;
+    border-top-left-radius: $border-radius;
+  }
+}

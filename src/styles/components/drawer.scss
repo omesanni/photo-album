@@ -1,0 +1,48 @@
+.drawer-panel {
+  border-bottom: 1px solid $bluish-gray;
+
+  &__header {
+    position: relative;
+    display: flex;
+    padding: 1rem 3rem 1rem 1rem;
+    text-transform: capitalize;
+
+    .is-open &,
+    &:hover {
+      @include cursor-pointer;
+      font-weight: 350;
+      background: $bluish-gray;
+
+      &::after {
+        opacity: 1;
+        border-color: $gray;
+      }
+    }
+
+    &::after {
+      content: "+";
+      position: absolute;
+      right: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      font-weight: normal;
+      opacity: 0.5;
+      text-align: center;
+    }
+  }
+
+  &__content {
+    display: none;
+    position: relative;
+    padding: 1rem 3rem 1rem 1rem;
+    max-height: 20rem;
+    overflow: auto;
+
+    .is-open & {
+      display: block;
+    }
+  }
+}

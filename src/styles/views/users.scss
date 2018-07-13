@@ -1,0 +1,69 @@
+.users-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  font-weight: $default-font-weight;
+  font-size: 1.5rem;
+
+  @media #{$breakpoint-small} {
+    font-size: 1.6rem;
+  }
+
+  .users-wrapper {
+    display: flex;
+    position: relative;
+    width: 95%;
+    padding: 1.25rem;
+    background: $white;
+
+    @media #{$breakpoint-medium} {
+      width: 80%;
+    }
+  }
+
+  .users-list {
+    width: 30%;
+    border-right: 1px solid $bluish-gray;
+    padding: 0 0.62rem;
+
+    @media #{$breakpoint-medium} {
+      width: 20%;
+    }
+
+    &__item {
+      padding: 0.87rem;
+      border-bottom: 1px solid $bluish-gray;
+      transition: background 0.5s ease;
+
+      &.active, &:hover {
+        @include cursor-pointer;
+        background: $bluish-gray;
+      }
+    }
+  }
+
+  .albums {
+    width: 80%;
+    margin-left: 2rem;
+    position: relative;
+
+    .album-cards-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+
+      .card {
+        flex: 1 1 100%;
+        margin-bottom: 1rem;
+
+        @media #{$breakpoint-small} {
+          flex: 0 1 calc(50% - 1em);
+          margin-right: 1rem;
+        }
+
+        @media #{$breakpoint-medium} {
+          flex: 0 1 calc(30% - 1em);
+        }
+      }
+    }
+  }
+}
