@@ -1,3 +1,8 @@
 @mixin cursor-pointer {
-  cursor: pointer
+  cursor: pointer;
+}
+
+@mixin flex-and-align-center {
+  display: flex;
+  align-items: center;
 }

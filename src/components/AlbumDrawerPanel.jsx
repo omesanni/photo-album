@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Alert from './Alert';
 import Loader from './Loader';
+import PhotoSlider from './PhotoSlider';
 
 class AlbumDrawerPanel extends React.Component {
   constructor() {
@@ -24,8 +25,16 @@ class AlbumDrawerPanel extends React.Component {
   handleAlbumPanelClick() {
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
-      content: { ...this.state.content, fetching: true },
+      content: {
+        ...this.state.content,
+        fetching: !prevState.isOpen,
+      },
     }));
+
+    // Don't fetch photos if closing panel
+    if (this.state.isOpen) {
+      return;
+    }
 
     // fetch album photos
     return this.props.onPanelClick(this.props.item.id)
@@ -45,36 +54,18 @@ class AlbumDrawerPanel extends React.Component {
    * @return {JSX}
    */
   renderContents() {
-    const { data: contents, fetching, errored } = this.state.content;
+    const { content: { data: contents, fetching, errored } } = this.state;
+    const showAlert = !fetching && (errored || !contents.length);
 
     return (
       <React.Fragment>
         {fetching && <Loader />}
 
-        {!fetching && (errored || !contents.length) && (
+        {showAlert && (
           <Alert message={errored ? 'Network Error' : 'No photos to display'} />
         )}
 
-        <div className={'album-cards-wrapper'}>
-          {contents.map(content => (
-            <div
-              key={content.id}
-              className={'card'}
-            >
-              <img
-                src={content.url}
-                alt={content.title}
-                className={'card__image'}
-              />
-
-              <div className={'card__body'}>
-                <h5 className={'m0-p0'}>
-                  {content.title}
-                </h5>
-              </div>
-            </div>
-          ))}
-        </div>
+        {!fetching && <PhotoSlider photos={contents} />}
       </React.Fragment>
     );
   }

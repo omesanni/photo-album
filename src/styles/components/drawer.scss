@@ -32,13 +32,18 @@
       opacity: 0.5;
       text-align: center;
     }
+
+    .is-open & {
+      &::after {
+        content: "-";
+      }
+    }
   }
 
   &__content {
     display: none;
     position: relative;
     padding: 1rem 3rem 1rem 1rem;
-    max-height: 25rem;
     overflow: auto;
 
     .is-open & {

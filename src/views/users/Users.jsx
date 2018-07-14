@@ -99,13 +99,15 @@ export class Users extends React.Component {
       errored: albumsError,
     } = this.state.albums;
 
+    const showAlertForUsers = !fetchingUsers && (usersError || !users.length);
+    const showAlertForAlbums = !fetchingAlbums && (albumsError || !albums.length);
+
     return (
       <section className={'users-section'}>
-
         <div className={'users-wrapper'}>
           {fetchingUsers && <Loader />}
 
-          {!fetchingUsers && (usersError || !users.length) && (
+          {showAlertForUsers && (
             <Alert message={usersError ? 'Network Error' : 'No users to display'} />
           )}
 
@@ -114,13 +116,13 @@ export class Users extends React.Component {
               <UsersList
                 users={users}
                 defaultActiveItem={users[0].id}
-                onItemClick={userId => this.fetchAlbums(userId)}
+                onItemClick={this.fetchAlbums}
               />
 
               <div className={'albums'}>
                 {fetchingAlbums && <Loader />}
 
-                {!fetchingAlbums && (albumsError || !albums.length) && (
+                {showAlertForAlbums && (
                   <Alert message={albumsError ? 'Network Error' : 'No albums to display'} />
                 )}
 
@@ -132,7 +134,7 @@ export class Users extends React.Component {
 
                     <AlbumDrawer
                       items={albums}
-                      onPanelClick={albumId => this.fetchAlbumPhotos(albumId)}
+                      onPanelClick={this.fetchAlbumPhotos}
                     />
                   </React.Fragment>
                 )}
