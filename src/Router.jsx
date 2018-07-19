@@ -11,7 +11,7 @@ const Router = () => (
       <Switch>
         <Route
           exact
-          path='/'
+          path={'/'}
           component={Users}
         />
         <Redirect to={'/'} />

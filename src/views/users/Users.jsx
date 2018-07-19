@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import axios from 'axios';
-import classnames from 'classnames';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faSearch from '@fortawesome/fontawesome-free-solid/faSearch';
 import Loader from '../../components/Loader';
 import AlbumDrawer from '../../components/AlbumDrawer';
 import Alert from '../../components/Alert';
 import UsersList from '../../components/UsersList';
 
-export class Users extends React.Component {
+class Users extends React.Component {
   constructor() {
     super();
 
@@ -48,7 +45,7 @@ export class Users extends React.Component {
       this.setState(() => ({
         users: { data: res.data, fetching: false, errored: false },
       }));
-    }, (err) => {
+    }, () => {
       this.setState(() => ({
         users: { data: [], fetching: false, errored: true },
         albums: { ...this.state.albums, fetching: true },
@@ -70,7 +67,7 @@ export class Users extends React.Component {
       this.setState(() => ({
         albums: { data: res.data, fetching: false, errored: false },
       }));
-    }, (err) => {
+    }, () => {
       this.setState(() => ({
         albums: { data: [], fetching: false, errored: true },
       }));
@@ -112,7 +109,7 @@ export class Users extends React.Component {
           )}
 
           {!!users.length && (
-            <React.Fragment>
+            <Fragment>
               <UsersList
                 users={users}
                 defaultActiveItem={users[0].id}
@@ -127,7 +124,7 @@ export class Users extends React.Component {
                 )}
 
                 {!!albums.length && (
-                  <React.Fragment>
+                  <Fragment>
                     <h5 className={'subject-title'}>
                       {'ALBUMS'}
                     </h5>
@@ -136,10 +133,10 @@ export class Users extends React.Component {
                       items={albums}
                       onPanelClick={this.fetchAlbumPhotos}
                     />
-                  </React.Fragment>
+                  </Fragment>
                 )}
               </div>
-            </React.Fragment>
+            </Fragment>
           )}
         </div>
       </section>

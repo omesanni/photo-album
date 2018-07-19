@@ -5,6 +5,9 @@
     "browser": true,
     "node": true
   },
+  "globals": {
+    "PHOTOS_API": true
+  },
   "rules": {
     "class-methods-use-this": "off",
     "comma-dangle": ["error", {

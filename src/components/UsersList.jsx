@@ -32,12 +32,13 @@ class UsersList extends React.Component {
         {users.map(user => (
           <li
             key={user.id}
-            onClick={() => this.handleItemClick(user.id)}
             className={classnames('users-list__item', {
               active: this.state.activeItem === user.id,
             })}
           >
-            {user.name}
+            <a onClick={() => this.handleItemClick(user.id)}>
+              {user.name}
+            </a>
           </li>
         ))}
       </ul>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Header = props => (
+const Header = () => (
   <div>
     <header className={'header'}>
       <nav className={'navbar'}>

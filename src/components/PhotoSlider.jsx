@@ -26,15 +26,10 @@ class PhotoSlider extends React.Component {
 
     let newIndex = slideIndex + index;
 
-    switch (true) {
-      case newIndex < 0: {
-        newIndex = photos.length - 1;
-        break;
-      }
-      case newIndex === photos.length: {
-        newIndex = 0;
-        break;
-      }
+    if (newIndex < 0) {
+      newIndex = photos.length - 1;
+    } else if (newIndex === photos.length) {
+      newIndex = 0;
     }
 
     this.setState(() => ({ slideIndex: newIndex }));

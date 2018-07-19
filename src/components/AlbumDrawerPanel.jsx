@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import Alert from './Alert';
@@ -33,7 +33,7 @@ class AlbumDrawerPanel extends React.Component {
 
     // Don't fetch photos if closing panel
     if (this.state.isOpen) {
-      return;
+      return undefined;
     }
 
     // fetch album photos
@@ -42,7 +42,7 @@ class AlbumDrawerPanel extends React.Component {
         this.setState(() => ({
           content: { data: res.data, fetching: false, errored: false },
         }));
-      }, (err) => {
+      }, () => {
         this.setState(() => ({
           content: { data: [], fetching: false, errored: true },
         }));
@@ -58,7 +58,7 @@ class AlbumDrawerPanel extends React.Component {
     const showAlert = !fetching && (errored || !contents.length);
 
     return (
-      <React.Fragment>
+      <Fragment>
         {fetching && <Loader />}
 
         {showAlert && (
@@ -66,7 +66,7 @@ class AlbumDrawerPanel extends React.Component {
         )}
 
         {!fetching && <PhotoSlider photos={contents} />}
-      </React.Fragment>
+      </Fragment>
     );
   }
 
@@ -75,9 +75,11 @@ class AlbumDrawerPanel extends React.Component {
     const { fetching } = this.state.content;
 
     return (
-      <div className={classnames('drawer-panel', {
-        'is-open': this.state.isOpen,
-      })}>
+      <div
+        className={classnames('drawer-panel', {
+          'is-open': this.state.isOpen,
+        })}
+      >
         <div
           className={'drawer-panel__header'}
           onClick={this.handleAlbumPanelClick}
